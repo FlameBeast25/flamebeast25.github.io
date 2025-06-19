@@ -162,7 +162,6 @@
     </style>
 </head>
 <body>
-
     <div class="container">
         <h1>
             FlameBeast25's Portfolio
@@ -179,14 +178,12 @@
         </div>
 
         <div id="home" class="tab-content active">
-            <h2>GitHub Profile</h2>
                 <div style="height: 800px; border-radius: 12px; overflow: hidden; border: 1px solid #333;">
                     <h2>GitHub README</h2>
                         <div id="readme-container" style="background-color: #1e1e1e; padding: 20px; border-radius: 12px; border: 1px solid #333;">
                             <p>Loading README...</p>
                         </div>
                 </div>
-            <hr>
         </div>
         <!--
         <div id="template" class="tab-content">
@@ -390,8 +387,6 @@
         -->
     </div>
 
-    
-
     <script>
         function openTab(evt, tabName) {
             var i, tabcontent, tablinks;
@@ -407,6 +402,18 @@
             evt.currentTarget.className += " active";
         }
     </script>
-
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        fetch('https://raw.githubusercontent.com/FlameBeast25/FlameBeast25/main/README.md')
+            .then(res => res.text())
+            .then(md => {
+            const html = marked.parse(md);
+            document.getElementById('readme-container').innerHTML = html;
+            })
+            .catch(err => {
+            document.getElementById('readme-container').innerHTML = "<p>Failed to load README.</p>";
+            console.error("README fetch error:", err);
+            });
+    </script>
 </body>
 </html>
